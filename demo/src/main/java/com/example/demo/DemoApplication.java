@@ -19,7 +19,6 @@ public class DemoApplication {
 	@Qualifier("es1")
 	private EmployeeService employeeService;
 
-
 	public DemoApplication(EmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}
@@ -33,8 +32,13 @@ public class DemoApplication {
 		employeeService.findAll();
 	}
 
+//	@GetMapping("/hello")
+//	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
+//		return String.format("Hello %s!", name);
+//	}
+
 	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return String.format("Hello %s!", name);
+	public String hello(String firstName, String lastName) {
+		return employeeService.getEmployeeNickname(firstName, lastName);
 	}
 }
