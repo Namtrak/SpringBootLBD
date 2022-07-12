@@ -21,7 +21,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -33,18 +32,6 @@
 			<version>RELEASE</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!--		<dependency>-->
-<!--			<groupId>org.junit.vintage</groupId>-->
-<!--			<artifactId>junit-vintage-engine</artifactId>-->
-<!--			<scope>test</scope>-->
-<!--			<exclusions>-->
-<!--				<exclusion>-->
-<!--					<groupId>org.hamcrest</groupId>-->
-<!--					<artifactId>hamcrest-core</artifactId>-->
-<!--				</exclusion>-->
-<!--			</exclusions>-->
-<!--		</dependency>-->
 	</dependencies>
 
 	<build>
@@ -59,26 +46,26 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<profiles>
+						<profile>
+							<id>dev</id>
+							<activation>
+								<activeByDefault>true</activeByDefault>
+							</activation>
+							<properties>
+								<spring.profiles.active>dev</spring.profiles.active>
+							</properties>
+						</profile>
+						<profile>
+							<id>prod</id>
+							<properties>
+								<spring.profiles.active>prod</spring.profiles.active>
+							</properties>
+						</profile>
+					</profiles>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<spring.profiles.active>dev</spring.profiles.active>
-			</properties>
-		</profile>
-		<profile>
-			<id>prod</id>
-			<properties>
-				<spring.profiles.active>prod</spring.profiles.active>
-			</properties>
-		</profile>
-	</profiles>
-
 </project>
