@@ -3,12 +3,12 @@ package com.example.demo.service.employee;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Qualifier("es1")
-@Primary
+@Profile("dev")
 public class EmployeeService1 implements EmployeeService{
     @Value("${project.prefix}")
     private String prefix;

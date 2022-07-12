@@ -14,9 +14,7 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 @RestController
 public class DemoApplication {
-
 	@Autowired
-	@Qualifier("es1")
 	private EmployeeService employeeService;
 
 	public DemoApplication(EmployeeService employeeService) {
@@ -39,6 +37,8 @@ public class DemoApplication {
 
 	@GetMapping("/hello")
 	public String hello(String firstName, String lastName) {
+		firstName = "Mateo";
+		lastName = "Meme";
 		return employeeService.getEmployeeNickname(firstName, lastName);
 	}
 }

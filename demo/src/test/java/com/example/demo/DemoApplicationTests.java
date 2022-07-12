@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.util.Assert;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@ActiveProfiles("dev")
 class DemoApplicationTests {
 
 	@Autowired
@@ -18,6 +20,7 @@ class DemoApplicationTests {
 	private String prefix;
 	@Value("${project.suffix}")
 	private String suffix;
+
 
 	@Test
 	void generatedLoginName() {
