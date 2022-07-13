@@ -1,5 +1,6 @@
 package com.example.demo.service.employee;
 
+import com.example.demo.entity.employee.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,16 +8,21 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Profile("dev")
 public class EmployeeService1 implements EmployeeService{
-    Logger logger = LoggerFactory.getLogger(EmployeeService1.class);
     @Value("${project.prefix}")
     private String prefix;
     @Value("${project.suffix}")
     private String suffix;
+
+    Logger logger = LoggerFactory.getLogger(EmployeeService1.class);
+    Map<Long, Employee> dbEmulator;
+
 
     @Override
     public List findAll() {
@@ -30,5 +36,34 @@ public class EmployeeService1 implements EmployeeService{
         logger.info("The result of function: " + result);
 
         return result;
+    }
+
+    @Override
+    public Employee findByName(String name) {
+        if (dbEmulator.isEmpty()) {
+            return null;
+        }
+
+        Collection<Employee> employees = dbEmulator.values();
+
+        for (Employee employee : employees) {
+            if (employee.getFirstName().equals(name) || employee.getLastName().equals(name)) {
+                return employee;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public void save(Employee employee) {
+        if (dbEmulator.equals(employee)) {
+            logger.info("Provided employee already exists in the db");
+        } else if (dbEmulator.containsKey(employee.getId())){
+            logger.info("You can't add employee with the existing id to the db");
+        }
+
+        dbEmulator.put(employee.getId(), employee);
+        logger.info("Employee " + employee.getFirstName() + " " + employee.getLastName() + " was added to the db.");
     }
 }
