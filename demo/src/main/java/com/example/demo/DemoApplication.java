@@ -37,9 +37,6 @@ public class DemoApplication {
 
 	@GetMapping("/hello")
 	public String hello(String firstName, String lastName) {
-		firstName = "Mateo";
-		lastName = "Meme";
-
 		return employeeService.getEmployeeNickname(firstName, lastName);
 	}
 }

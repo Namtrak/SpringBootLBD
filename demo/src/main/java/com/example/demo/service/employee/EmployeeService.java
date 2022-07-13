@@ -11,5 +11,5 @@ public interface EmployeeService {
     List findAll();
     String getEmployeeNickname(String first_name, String last_name);
     Employee findByName(String name);
-    void save(Employee employee);
+    boolean save(Employee employee);
 }

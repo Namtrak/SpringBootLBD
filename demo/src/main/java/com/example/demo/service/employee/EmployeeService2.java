@@ -25,7 +25,7 @@ public class EmployeeService2 implements EmployeeService{
     }
 
     @Override
-    public void save(Employee employee) {
-
+    public boolean save(Employee employee) {
+        return false;
     }
 }
